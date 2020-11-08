@@ -1,8 +1,36 @@
 version: '3.4'
-
+ 
+networks:
+  mydockerapi-dev:
+    driver: bridge 
+ 
 services:
-  otus.teaching.promocodefactory.webhost:
-    image: ${DOCKER_REGISTRY-}otusteachingpromocodefactorywebhost
+  mydockerapi:
+    image: mydockerapi:latest
+    depends_on:
+      - "postgres_image"
     build:
       context: .
-      dockerfile: Otus.Teaching.PromoCodeFactory.WebHost\Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"     
+    environment:
+      DB_CONNECTION_STRING: "host=postgres_image;port=5432;database=blogdb;username=postgres;password=5tgbh22qA"
+    networks:
+      - mydockerapi-dev  
+  
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "5tgbh22qA"
+      POSTGRES_DB: "blogdb"
+    networks:
+      - mydockerapi-dev
+volumes:
+  db_volume:

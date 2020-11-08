@@ -14,6 +14,7 @@ using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.DataAccess;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Repositories;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
+using Microsoft.OpenApi.Models;
 
 namespace Otus.Teaching.PromoCodeFactory.WebHost
 {
@@ -28,22 +29,22 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddControllers().AddMvcOptions(x=> 
-                x.SuppressAsyncSuffixInActionNames = false);
+
             services.AddDbContext<DataContext>(x =>
             {
-                x.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"),
+                x.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"),
                        assembly => assembly.MigrationsAssembly("Otus.Teaching.PromoCodeFactory.DataAccess"));
                 x.UseLazyLoadingProxies();
             });
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
-            services.AddOpenApiDocument(options =>
+            services.AddSwaggerGen(c =>
             {
-                options.Title = "PromoCode Factory API Doc";
-                options.Version = "1.0";
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
+                        services.AddMvc();
+            services.AddControllers().AddMvcOptions(x=> 
+                x.SuppressAsyncSuffixInActionNames = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
