@@ -37,14 +37,15 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
                 x.UseLazyLoadingProxies();
             });
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddMvc();
+            services.AddControllers().AddMvcOptions(x =>
+                x.SuppressAsyncSuffixInActionNames = false);
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
-                        services.AddMvc();
-            services.AddControllers().AddMvcOptions(x=> 
-                x.SuppressAsyncSuffixInActionNames = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,16 +60,16 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
                 app.UseHsts();
             }
 
-            app.UseOpenApi();
-            app.UseSwaggerUi3(x =>
-            {
-                x.DocExpansion = "list";
-            });
-            
+
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Otus.Teaching.PromoCodeFactory");
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
