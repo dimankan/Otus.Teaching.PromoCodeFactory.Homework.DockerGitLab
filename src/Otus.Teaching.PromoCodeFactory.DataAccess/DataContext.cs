@@ -16,7 +16,11 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
         public DbSet<Role> Roles { get; set; }
         
         public DbSet<Employee> Employees { get; set; }
-        
+
+        public DataContext()
+        {
+
+        }
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }

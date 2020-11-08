@@ -1,9 +1,9 @@
-version: '3.4'
+version: '3.8'
  
 
 services:
   web:
-    image: mydockerapi
+    image: mydockerapiotus
     depends_on:
       - postgres_image
     build:
@@ -12,9 +12,9 @@ services:
     ports:
       - 3000:3000     
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:3000
-      - DB_CONNECTION_STRING=host=postgresql-13;port=5432;database=blogdb;username=postgres;password=5tgbh22qA
+    - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=http://+:3000
+     - DB_CONNECTION_STRING=host=postgresql-13;port=5432;database=blogdb;username=postgres;password=5tgbh22qA
   
   postgres_image:
     image: postgres:13.0
@@ -26,5 +26,3 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "5tgbh22qA"
       POSTGRES_DB: "blogdb"
-
-
