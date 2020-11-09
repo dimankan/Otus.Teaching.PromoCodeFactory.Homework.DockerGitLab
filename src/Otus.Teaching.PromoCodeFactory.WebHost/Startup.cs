@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Otus.Teaching.PromoCodeFactory.Core.Abstractions.Repositories;
-using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.DataAccess;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Repositories;
 using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
@@ -29,9 +23,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionStrings = _configuration.GetConnectionString("DbContextString");
             services.AddDbContext<DataContext>(x =>
             {
-                x.UseNpgsql(_configuration.GetConnectionString("DbContextString"),
+                x.UseNpgsql(connectionStrings,
                        assembly => assembly.MigrationsAssembly("Otus.Teaching.PromoCodeFactory.DataAccess"));
                 x.UseLazyLoadingProxies();
             });
@@ -58,11 +53,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
             {
                 app.UseHsts();
             }
-
-
-
+            
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
