@@ -27,7 +27,10 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             _customerRepository = customerRepository;
             _preferenceRepository = preferenceRepository;
         }
-        
+        /// <summary>
+        /// Получить информацию обо всех покупателях
+        /// </summary>
+        /// <returns>Краткая информация о покупателе</returns>
         [HttpGet]
         public async Task<ActionResult<CustomerShortResponse>> GetCustomersAsync()
         {

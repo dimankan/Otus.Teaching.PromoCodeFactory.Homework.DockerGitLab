@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
-using Otus.Teaching.PromoCodeFactory.DataAccess.Data;
 
 namespace Otus.Teaching.PromoCodeFactory.DataAccess
 {
@@ -20,13 +19,10 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
 
         public DataContext()
         {
-            
-        }
-        
-        public DataContext(DbContextOptions<DataContext> options)
-            : base(options)
-        {
 
+        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
