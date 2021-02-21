@@ -58,7 +58,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Controllers
             
             await _customerRepository.AddAsync(customer);
 
-            return CreatedAtAction(nameof(GetCustomerAsync), new {id = customer.Id}, null);
+            var actionName = nameof(GetCustomerAsync);
+            return CreatedAtAction(actionName, new {id = customer.Id}, null);
         }
         
         [HttpPut("{id:guid}")]
