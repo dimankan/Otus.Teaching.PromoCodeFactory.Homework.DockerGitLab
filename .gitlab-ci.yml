@@ -1,0 +1,19 @@
+image: docker:19.03.12
+
+services:
+  - docker:19.03.12-dind
+
+stages:
+  - build
+
+before_script:
+  - echo $OTUS3_DEPLOY_TOKEN | docker login registry.gitlab.com -u otus-deploy --password-stdin
+
+Build:
+  stage: build
+  only:
+    - homework3
+
+  script:
+    - docker build src/ -t $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
