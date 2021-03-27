@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
-using Otus.Teaching.PromoCodeFactory.DataAccess.Data;
 
 namespace Otus.Teaching.PromoCodeFactory.DataAccess
 {
@@ -19,14 +18,12 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
         public DbSet<Employee> Employees { get; set; }
 
         public DataContext()
-        {
-            
+        {            
         }
         
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +38,11 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
                 .HasOne(bc => bc.Preference)
                 .WithMany()
                 .HasForeignKey(bc => bc.PreferenceId); 
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=promocodesdb;Username=postgres;Password=karlskorallami");
         }
     }
 }
