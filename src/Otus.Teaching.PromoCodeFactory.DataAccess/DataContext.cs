@@ -39,10 +39,5 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
                 .WithMany()
                 .HasForeignKey(bc => bc.PreferenceId); 
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=promocodesdb;Username=postgres;Password=karlskorallami");
-        }
     }
 }
