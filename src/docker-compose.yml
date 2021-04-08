@@ -1,0 +1,28 @@
+﻿version: '3.8'
+services:
+    promocode-factory-api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: 'promocode-factory-api'
+        ports:
+            - '5000:5000'
+        environment:
+            - ConnectionStrings__promocodesdb=Host=promocode-factory-db;Database=promocodesdb;Username=postgres;Password=karlskorallami
+        depends_on:
+            - 'promocode-factory-db'
+  
+    promocode-factory-db:
+        image: postgres:13.2-alpine
+        container_name: 'promocode-factory-db'
+        volumes:
+            - promocodes-db:/var/lib/postgresql/promocodes
+        ports:
+            - '5432:5432'
+        environment:
+            - POSTGRES_PASSWORD=karlskorallami
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=promocodesdb
+
+volumes:
+    promocodes-db:
