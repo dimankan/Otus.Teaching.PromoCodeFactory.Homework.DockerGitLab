@@ -1,0 +1,2 @@
+﻿include:
+  - local: src/Otus.Teaching.PromoCodeFactory.WebHost/gitlab-ci.yml

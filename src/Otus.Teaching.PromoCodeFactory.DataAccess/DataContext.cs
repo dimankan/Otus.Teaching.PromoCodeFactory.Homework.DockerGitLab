@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.Administration;
 using Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement;
 using Otus.Teaching.PromoCodeFactory.DataAccess.Data;
@@ -41,6 +43,11 @@ namespace Otus.Teaching.PromoCodeFactory.DataAccess
                 .HasOne(bc => bc.Preference)
                 .WithMany()
                 .HasForeignKey(bc => bc.PreferenceId); 
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            
         }
     }
 }
