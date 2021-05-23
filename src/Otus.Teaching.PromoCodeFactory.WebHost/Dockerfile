@@ -1,13 +1,13 @@
 ﻿FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 
 WORKDIR /app
+ENV ASPNETCORE_URLS=http://*:5000
 EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY [".", "./"]
-RUN ls -a
 RUN dotnet restore "Otus.Teaching.PromoCodeFactory.WebHost/Otus.Teaching.PromoCodeFactory.WebHost.csproj"
 COPY . .
 WORKDIR "/src/Otus.Teaching.PromoCodeFactory.WebHost"

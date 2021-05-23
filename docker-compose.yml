@@ -32,7 +32,7 @@ services:
   migration:
     build:
       dockerfile: src/DbMigration/Dockerfile
-      context: 
+      context: .
     image: "homework3dbmigration:latest"
     environment:
       - "ConnectionStrings__PostgresqlDb=Host=homework3_db; user id=pgUser; password=pgPassword; database=homework3"
@@ -42,16 +42,13 @@ services:
     links:
       - "db:homework3_db"
 
-  api:
-    build:
-      dockerfile: src/Otus.Teaching.PromoCodeFactory.WebHost/Dockerfile
-      context: .
-    image: "homework3api:latest"
+  api:    
+    image: "registry.gitlab.com/progpow/otus.teaching.promocodefactory.homework.dockergitlab/homework3_api:latest"
+    ports:
+      - 5080:80
     environment:
       - "ConnectionStrings__PostgresqlDb=Host=homework3_db; user id=pgUser; password=pgPassword; database=homework3"
-    container_name: "homework3_api"
-    links:
-      - "migration:homework3_migration"
+    container_name: "homework3_api"    
   
 volumes:
   database_data:

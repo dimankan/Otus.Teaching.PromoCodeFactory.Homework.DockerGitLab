@@ -1,2 +1,3 @@
 ﻿include:
   - local: src/Otus.Teaching.PromoCodeFactory.WebHost/gitlab-ci.yml
+  - local: src/DbMigration/gitlab-ci.yml

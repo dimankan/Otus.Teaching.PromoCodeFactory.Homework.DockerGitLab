@@ -1,0 +1,13 @@
+﻿build_dbmigration:
+  image: docker:19.03.12
+  stage: build
+  services:
+    - docker:19.03.12-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY/$CI_PROJECT_PATH
+    - docker build -t $CI_REGISTRY/$CI_PROJECT_PATH/dbmigration:latest -f ./src/DbMigration/Dockerfile ./src
+    - docker push $CI_REGISTRY/$CI_PROJECT_PATH/dbmigration:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual
+    - when: manual
