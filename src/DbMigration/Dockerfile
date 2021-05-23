@@ -5,7 +5,7 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 RUN ls
-COPY ["./src", "./"]
+COPY [".", "./"]
 RUN dotnet restore "Otus.Teaching.PromoCodeFactory.WebHost/Otus.Teaching.PromoCodeFactory.WebHost.csproj"
 COPY . .
 WORKDIR "/src/Otus.Teaching.PromoCodeFactory.WebHost"
