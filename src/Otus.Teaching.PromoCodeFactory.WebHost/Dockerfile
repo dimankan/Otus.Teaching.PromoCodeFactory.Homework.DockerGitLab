@@ -6,8 +6,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
-COPY ["./src", "./"]
 RUN ls -a
+COPY ["./src", "./"]
 RUN dotnet restore "Otus.Teaching.PromoCodeFactory.WebHost/Otus.Teaching.PromoCodeFactory.WebHost.csproj"
 COPY . .
 WORKDIR "/src/Otus.Teaching.PromoCodeFactory.WebHost"
