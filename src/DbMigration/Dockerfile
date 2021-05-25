@@ -12,4 +12,4 @@ WORKDIR "/src/Otus.Teaching.PromoCodeFactory.WebHost"
 RUN dotnet build "Otus.Teaching.PromoCodeFactory.WebHost.csproj" -c Release -o /app/build
 RUN dotnet tool install --global dotnet-ef --version 3.1.4
 ENV PATH="${PATH}:/root/.dotnet/tools"
-CMD ["dotnet", "ef", "database", "update", "${MIGRATION_NAME}"]
+CMD dotnet ef database update ${MIGRATION_NAME}
