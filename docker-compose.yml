@@ -46,7 +46,9 @@ services:
       - 5080:80
     environment:
       - "ConnectionStrings__PostgresqlDb=Host=homework3_db; user id=pgUser; password=pgPassword; database=homework3"
-    container_name: "homework3_api"    
+    container_name: "homework3_api"
+    profiles:
+      - apps
   
 volumes:
   database_data:
