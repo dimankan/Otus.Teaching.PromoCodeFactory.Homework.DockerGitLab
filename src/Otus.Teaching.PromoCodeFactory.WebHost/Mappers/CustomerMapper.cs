@@ -18,6 +18,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Mappers
             customer.Email = request.Email;
             customer.FirstName = request.FirstName;
             customer.LastName = request.LastName;
+            customer.Patronymic = request.Patronymic;
             
             if (preferences != null && preferences.Any())
             {
