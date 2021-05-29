@@ -1,0 +1,57 @@
+version: "3.4"
+
+services:
+  db:
+    image: "postgres:latest"
+    container_name: "homework3_db"
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=pgUser
+      - POSTGRES_PASSWORD=pgPassword
+      - POSTGRES_DB=pgDatabase
+    volumes:
+      - database_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: 'homework3_db_admin'
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: pgAdminPassword
+      PGADMIN_LISTEN_PORT: 80    
+    ports:
+      - 8080:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - "db:homework3_db"
+    
+  migration:
+    image: "registry.gitlab.com/progpow/otus.teaching.promocodefactory.homework.dockergitlab/dbmigration:latest"    
+    environment:
+      - "ConnectionStrings__PostgresqlDb=Host=homework3_db; user id=pgUser; password=pgPassword; database=homework3"
+      - "MIGRATION_NAME=20210524124108_AddPatronymic"
+    container_name: "homework3_migration"
+    profiles:
+      - tools
+    links:
+      - "db:homework3_db"
+
+  api:    
+    image: "registry.gitlab.com/progpow/otus.teaching.promocodefactory.homework.dockergitlab/homework3_api:latest"
+    ports:
+      - 5080:80
+    environment:
+      - "ConnectionStrings__PostgresqlDb=Host=homework3_db; user id=pgUser; password=pgPassword; database=homework3"
+    container_name: "homework3_api"
+    profiles:
+      - apps
+  
+volumes:
+  database_data:
+    driver: local
+  pgadmin-data:
+    driver: local

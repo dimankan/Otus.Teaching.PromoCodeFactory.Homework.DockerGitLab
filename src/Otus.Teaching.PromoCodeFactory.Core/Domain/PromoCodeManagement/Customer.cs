@@ -12,6 +12,8 @@ namespace Otus.Teaching.PromoCodeFactory.Core.Domain.PromoCodeManagement
         public string FullName => $"{FirstName} {LastName}";
 
         public string Email { get; set; }
+        
+        public string Patronymic { get; set; }
 
         public virtual ICollection<CustomerPreference> Preferences { get; set; }
     }

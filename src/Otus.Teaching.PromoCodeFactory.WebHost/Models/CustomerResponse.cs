@@ -11,6 +11,8 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Patronymic { get; set; }
+        
         public List<PreferenceResponse> Preferences { get; set; }
         public List<PromoCodeShortResponse> PromoCodes { get; set; }
 
@@ -25,6 +27,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost.Models
             Email = customer.Email;
             FirstName = customer.FirstName;
             LastName = customer.LastName;
+            Patronymic = customer.Patronymic;
             Preferences = customer.Preferences.Select(x => new PreferenceResponse()
             {
                 Id = x.PreferenceId,
