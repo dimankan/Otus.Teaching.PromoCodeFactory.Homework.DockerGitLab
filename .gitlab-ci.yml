@@ -9,7 +9,7 @@ stages:
 build:
     stage: build
     script:
-        - dotnet build $PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o content
+        - dotnet build src/$PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o content
     only:
         - master
     artifacts:
