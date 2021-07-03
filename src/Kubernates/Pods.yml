@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: promocode-site
+  labels: 
+    app: promocode-site-label
+    version: "07.2021"
+spec:
+    containers:
+        - name: promocode-site
+          image: promo_factory:0.2
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP

@@ -4,6 +4,9 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
+        <UserSecretsId>3018eb00-e245-471b-b69d-02569a4281de</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,9 +15,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.4" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.4" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.7" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.7" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.7" />
       <PackageReference Include="NSwag.AspNetCore" Version="13.5.0" />
     </ItemGroup>
 
