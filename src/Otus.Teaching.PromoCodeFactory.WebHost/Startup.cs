@@ -28,7 +28,7 @@ namespace Otus.Teaching.PromoCodeFactory.WebHost
             services.AddScoped<IDbInitializer, EfDbInitializer>();
             services.AddDbContext<DataContext>(x =>
             {
-                x.UseSqlite("Filename=PromoCodeFactoryDb.sqlite");
+                x.UseNpgsql("Server=postgres;Port=5432;Database=promocodefactory;Username=postgres;Password=postgres;Keepalive=30");
                 x.UseLazyLoadingProxies();
             });
 
