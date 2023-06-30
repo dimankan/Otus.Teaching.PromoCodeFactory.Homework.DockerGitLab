@@ -1,0 +1,19 @@
+stages:
+  - build
+
+variables:
+  PROJECT_PATH: "src/Otus.Teaching.PromoCodeFactory.WebHost/Otus.Teaching.PromoCodeFactory.WebHost.csproj"
+
+build:
+  image: mcr.microsoft.com/dotnet/sdk:3.0
+  stage: build
+  tags:
+    - services-builder
+  script:
+    - if [[ -z ${PROJECT_PATH} ]]; then
+        echo "The project file path isn't defined!";
+        exit 1;
+      fi;
+    
+    - dotnet build  ${PROJECT_PATH}  --configuration Release
+  when: manual
