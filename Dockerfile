@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:3.1-focal AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0-focal AS base
 WORKDIR /app
 EXPOSE 5000
 
