@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+    otus.teaching.promocodefactory.webhost:
+        image: promo_factory:0.2
+        container_name: 'promo_factory_compose'
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - "ConnectionStrings:promo_db=Host=promo_db;Database=promo_db;Username=postgres;Password=password"
+        ports:
+            - "5000:5000"
+        depends_on:
+            - "promo_db"
+
+    promo_db:
+        image: "postgres:alpine"
+        container_name: "postgres"
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_PASSWORD=password
+    
+

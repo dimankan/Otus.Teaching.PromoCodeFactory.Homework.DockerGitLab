@@ -1,0 +1,18 @@
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
+
+variables:
+    PROJECT_NAME: Otus.Teaching.PromoCodeFactory.WebHost
+
+stages:
+    - build
+
+build:
+    stage: build
+    script:
+        - dotnet build src/$PROJECT_NAME/$PROJECT_NAME.csproj -c Release -o content
+    only:
+        - master
+        - /^[fF]eature[-_][a-zA-Z0-9]+$/
+    artifacts:
+        paths:
+            - content
